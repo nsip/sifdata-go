@@ -1,4 +1,8 @@
-package environments
+package environment
+
+import (
+    "encoding/xml"
+)
 
 type EnvironmentRequest struct {
 	XMLName              xml.Name `xml:"environment"`
@@ -83,4 +87,11 @@ type EnvironmentResponse struct {
 			} `xml:"services"`
 		} `xml:"provisionedZone"`
 	} `xml:"provisionedZones"`
+}
+
+func NewEnvironmentRequest() EnvironmentRequest {
+    e:= EnvironmentRequest{}
+    e.SolutionId = "HITS"
+    e.AuthenticationMethod = "Basic"
+    return e
 }
