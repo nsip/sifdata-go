@@ -2,6 +2,7 @@ package environment
 
 import (
     "encoding/xml"
+    "log"
 )
 
 type EnvironmentRequest struct {
@@ -89,9 +90,26 @@ type EnvironmentResponse struct {
 	} `xml:"provisionedZones"`
 }
 
+// Return an EnvironmentRequest
 func NewEnvironmentRequest() EnvironmentRequest {
     e:= EnvironmentRequest{}
     e.SolutionId = "HITS"
     e.AuthenticationMethod = "Basic"
+    return e
+}
+
+func ExampleNewEnvironmentRequest() {
+}
+
+func NewEnvironmentResponse() EnvironmentResponse {
+    e:= EnvironmentResponse{}
+    return e
+}
+
+func ParseEnvironmentResponse(in []byte) EnvironmentResponse {
+    e := NewEnvironmentResponse()
+	if err := xml.Unmarshal(in, &e); err != nil {
+		log.Fatal(err)
+	}
     return e
 }
